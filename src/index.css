@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: #0A0A0A;
+    background: #fff;
+  }
+  ::selection {
+    background: #FFD000;
+    color: #000;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Barlow', 'Inter', sans-serif;
+    letter-spacing: -0.025em;
+  }
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.in {
+    opacity: 1;
+    transform: none;
+  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
