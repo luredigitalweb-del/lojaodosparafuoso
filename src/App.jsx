@@ -501,58 +501,75 @@ export default function App() {
       {/* ============================================
           HERO — imagem de fundo
       ============================================ */}
-      <section
-        className="relative overflow-hidden"
-        style={{
-          backgroundImage: `url(/banner.jpg)`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center right',
-          backgroundRepeat: 'no-repeat',
-          backgroundColor: C.blue,
-        }}
-      >
-        {/* Overlay leve escurecendo lado esquerdo pra dar contraste no texto */}
+      <section className="relative overflow-hidden" style={{ backgroundColor: C.blue }}>
+        {/* Banner DESKTOP (horizontal) */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="hidden md:block absolute inset-0"
+          style={{
+            backgroundImage: `url(/banner.jpg)`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center right',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+        {/* Banner MOBILE (vertical) */}
+        <div
+          className="md:hidden absolute inset-0"
+          style={{
+            backgroundImage: `url(/banner-mobile.jpg)`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center bottom',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+
+        {/* Overlay desktop — escurece lado esquerdo */}
+        <div
+          className="hidden md:block absolute inset-0 pointer-events-none"
           style={{
             background: `linear-gradient(90deg, ${C.blue}E6 0%, ${C.blue}99 40%, ${C.blue}33 60%, transparent 80%)`,
           }}
         />
-        {/* Overlay mobile (escurece tudo pra dar contraste do texto) */}
-        <div className="absolute inset-0 pointer-events-none lg:hidden" style={{ background: `${C.blue}CC` }} />
+        {/* Overlay mobile — escurece o topo onde fica o texto */}
+        <div
+          className="md:hidden absolute inset-0 pointer-events-none"
+          style={{
+            background: `linear-gradient(180deg, ${C.blue}E6 0%, ${C.blue}AA 35%, ${C.blue}33 55%, transparent 70%)`,
+          }}
+        />
 
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-6 md:px-10 lg:px-16 pt-14 sm:pt-16 md:pt-24 pb-16 sm:pb-20 md:pb-32 min-h-[480px] sm:min-h-[540px] md:min-h-[640px] flex items-center">
-          <div className="fade-up text-white text-center sm:text-left max-w-xl lg:pl-4 w-full sm:w-auto">
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-6 md:px-10 lg:px-16 pt-8 sm:pt-10 md:pt-24 pb-[420px] xs:pb-[460px] sm:pb-[500px] md:pb-32 min-h-[680px] sm:min-h-[740px] md:min-h-[640px] flex items-start md:items-center">
+          <div className="fade-up text-white text-center md:text-left max-w-xl lg:pl-4 w-full md:w-auto">
             <div className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-black tracking-widest uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-5 sm:mb-7" style={{ background: C.yellow, color: C.blue }}>
               <Ico.bolt className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span className="hidden xs:inline">30 anos de mercado · </span>Desde 1995
             </div>
 
             <h1 className="font-black leading-[0.95] tracking-tight mb-5 sm:mb-6" style={{ fontSize: 'clamp(1.75rem, 7vw, 4rem)', textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
-              <span className="block" style={{ color: C.yellow }}>HÁ 30 ANOS,</span>
+              <span className="block shimmer-yellow">HÁ 30 ANOS,</span>
               <span className="block text-white">SUA MELHOR SOLUÇÃO</span>
-              <span className="block text-white">DA CASA À <span style={{ color: C.yellow }}>INDÚSTRIA!</span></span>
+              <span className="block text-white">DA CASA À <span className="shimmer-yellow">INDÚSTRIA!</span></span>
             </h1>
 
-            <p className="text-sm sm:text-base md:text-lg text-white/90 leading-relaxed mb-7 sm:mb-8 max-w-md mx-auto sm:mx-0" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.5)' }}>
+            <p className="text-sm sm:text-base md:text-lg text-white/90 leading-relaxed mb-7 sm:mb-8 max-w-md mx-auto md:mx-0" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.5)' }}>
               Fixadores, ferramentas, EPIs e tudo o que sua obra precisa.{' '}
               <strong className="text-white">Ligou? Pediu? Chegou!</strong>{' '}
               A entrega mais rápida de Fortaleza e região.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
-              <CTA size="xl" variant="green" className="w-full sm:w-auto justify-center">
-                <Ico.wa className="w-5 h-5" />
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center md:justify-start gap-2.5 sm:gap-3 w-full md:w-auto max-w-xs mx-auto sm:max-w-none">
+              <CTA size="xl" variant="green" className="w-full sm:w-auto justify-center !py-3 sm:!py-5 !text-sm sm:!text-base !px-5 sm:!px-8 !gap-2">
+                <Ico.wa className="w-4 h-4 sm:w-5 sm:h-5" />
                 Peça Agora!
-                <Ico.arr className="w-4 h-4" />
+                <Ico.arr className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </CTA>
               <a
                 href="#produtos"
                 style={{ background: C.yellow, color: C.blue, boxShadow: '0 8px 22px rgba(255,204,0,0.4)' }}
-                className="w-full sm:w-auto inline-flex items-center justify-center font-black uppercase tracking-wide rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98] px-6 sm:px-9 py-4 sm:py-5 text-sm sm:text-base gap-2 sm:gap-3"
+                className="w-full sm:w-auto inline-flex items-center justify-center font-black uppercase tracking-wide rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98] px-5 sm:px-9 py-3 sm:py-5 text-sm sm:text-base gap-2 sm:gap-3"
               >
                 Ver Produtos
-                <Ico.arr className="w-4 h-4" />
+                <Ico.arr className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </a>
             </div>
           </div>
@@ -565,6 +582,21 @@ export default function App() {
       <section className="relative py-16 md:py-20 overflow-hidden" style={{ background: C.blue }}>
         <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: `radial-gradient(circle at 2px 2px, ${C.yellow} 1.5px, transparent 0)`, backgroundSize: '28px 28px' }} />
         <div className="relative max-w-6xl mx-auto px-5 md:px-6">
+          {/* Título da seção */}
+          <div className="text-center mb-10 md:mb-14 fade-up">
+            <div className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-black tracking-widest uppercase px-4 py-1.5 rounded-full mb-4" style={{ background: C.yellow, color: C.blue }}>
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: C.blue }} />
+              Por que o Lojão
+            </div>
+            <h2 className="font-black tracking-tight leading-[0.95] text-white mb-3" style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)' }}>
+              Aqui é mais fácil de comprar.
+            </h2>
+            <p className="text-sm sm:text-base text-white/70 max-w-xl mx-auto">
+              Atendimento, entrega e variedade que sua obra precisa — tudo num lugar só.
+            </p>
+            <div className="mx-auto mt-5 h-1 w-16 rounded-full" style={{ background: C.yellow }} />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 justify-items-center">
             {[
               { Icon: Ico.truck, title: 'LIGOU? PEDIU? CHEGOU!', desc: 'A entrega mais rápida de Fortaleza! Receba seus produtos sem sair de casa, com a eficiência da nossa logística.' },
@@ -735,16 +767,16 @@ export default function App() {
               Em 2024 inauguramos nosso <strong style={{ color: C.yellow }}>Centro de Distribuição próprio</strong> e a <strong style={{ color: C.yellow }}>Loja Conceito</strong> na BR-116, garantindo mais estoque e mais agilidade pra você.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-8">
               {[
                 { n: '30+', label: 'Anos de história' },
                 { n: '+5mil', label: 'Clientes atendidos' },
                 { n: '10mil+', label: 'Itens em estoque' },
                 { n: '100%', label: 'Atendimento humano' },
               ].map((s, i) => (
-                <div key={i} className="rounded-xl p-4 border-l-4" style={{ background: 'rgba(255,255,255,0.08)', borderColor: C.yellow, backdropFilter: 'blur(8px)' }}>
-                  <div className="font-black text-3xl" style={{ color: C.yellow }}>{s.n}</div>
-                  <div className="text-xs uppercase tracking-wider font-bold mt-1 text-white/70">{s.label}</div>
+                <div key={i} className="rounded-xl p-3.5 sm:p-4 border-l-4 flex flex-col justify-between min-h-[92px] sm:min-h-[100px]" style={{ background: 'rgba(255,255,255,0.08)', borderColor: C.yellow, backdropFilter: 'blur(8px)' }}>
+                  <div className="font-black text-2xl sm:text-3xl leading-none" style={{ color: C.yellow }}>{s.n}</div>
+                  <div className="text-[10px] sm:text-xs uppercase tracking-wider font-bold mt-2 text-white/70 leading-tight">{s.label}</div>
                 </div>
               ))}
             </div>
@@ -754,7 +786,7 @@ export default function App() {
 
           <div className="fade-up relative">
             <div className="relative rounded-3xl overflow-hidden aspect-[4/5]" style={{ boxShadow: `0 30px 60px -20px rgba(30,58,138,0.4)` }}>
-              <img src={IMG.hero} alt="Lojão dos Parafusos" loading="lazy" className="w-full h-full object-cover" />
+              <img src="/fachada.jpg" alt="Loja Conceito Lojão dos Parafusos · BR-116, KM 10" loading="lazy" className="w-full h-full object-cover" />
               <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${C.blue}40, transparent)` }} />
               <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur rounded-2xl p-5">
                 <div className="flex items-center gap-1 mb-2" style={{ color: C.yellow }}>
@@ -1151,7 +1183,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-5 md:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-12">
             <div>
-              <Logo size="md" mono />
+              <Logo size="md" />
               <p className="mt-5 text-white/50 text-sm leading-relaxed">
                 Há 30 anos abastecendo Fortaleza com fixadores, ferramentas e EPIs.
               </p>
@@ -1222,6 +1254,31 @@ export default function App() {
       <style>{`
         .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
         .fade-up.in { opacity: 1; transform: none; }
+        .shimmer-yellow {
+          background-image: linear-gradient(
+            100deg,
+            #FFCC00 0%,
+            #FFCC00 38%,
+            #FFF5B0 47%,
+            #FFFFFF 50%,
+            #FFF5B0 53%,
+            #FFCC00 62%,
+            #FFCC00 100%
+          );
+          background-size: 250% 100%;
+          background-position: 200% 0;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+          animation: shimmerSlide 3.2s ease-in-out infinite;
+          animation-delay: 0.8s;
+        }
+        @keyframes shimmerSlide {
+          0% { background-position: 200% 0; }
+          50% { background-position: -100% 0; }
+          100% { background-position: -100% 0; }
+        }
       `}</style>
     </div>
   );
