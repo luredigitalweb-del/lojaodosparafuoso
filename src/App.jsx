@@ -24,16 +24,16 @@ const C = {
 // Imagens (Unsplash CDN — URLs estáveis)
 const IMG = {
   hero: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=1000&q=80',
-  parafusos: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=600&q=80',
-  ferragens: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=600&q=80',
-  eletricas: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=600&q=80',
-  manuais: 'https://images.unsplash.com/photo-1581244277943-fe4a9c777189?auto=format&fit=crop&w=600&q=80',
-  abrasivos: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80',
-  seguranca: 'https://images.unsplash.com/photo-1601055283742-8b27e81b5553?auto=format&fit=crop&w=600&q=80',
-  construcao: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80',
-  limpeza: 'https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=600&q=80',
-  adesivos: 'https://images.unsplash.com/photo-1567361808960-dec9cb578182?auto=format&fit=crop&w=600&q=80',
-  automotivo: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=600&q=80',
+  parafusos: 'https://macropar.com.br/wp-content/uploads/2023/11/parafusos-e-porcas.png',
+  ferragens: 'https://img.freepik.com/fotos-premium/parafusos-de-ferro-preto-fixadores-e-ferragens-em-branco_71756-2453.jpg',
+  eletricas: 'https://static.webarcondicionado.com.br/blog/uploads/2023/06/ferramentas-el%C3%A9tricas-webar-1024x616.jpg',
+  manuais: 'https://blog.ferramac.com.br/wp-content/uploads/2024/02/Captura-de-tela-2024-02-16-163602-1024x676.png',
+  abrasivos: 'https://fabras.com.br/wp-content/uploads/2017/05/discos-diamantados.jpg',
+  seguranca: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROalKlHfhCfeu2lrkX5WnGH2KE4wJpmHOs8g&s',
+  construcao: 'https://www.bauenconstrutorasp.com.br/uploads/pagina/elemento/campo/2022/09/2TVHKrvkfDVdSSXf/importancia-construcao-civil-1.webp',
+  limpeza: 'https://oficinafisgadatotal.com/wp-content/uploads/2023/11/1f675316-8a75-4e2b-8c24-6629bca4df0b.jpeg',
+  adesivos: 'https://pegmadeiras.com.br/wp-content/uploads/2024/03/Cascola-Adesivos-Packshot-Cascola-Tradicio.jpg',
+  automotivo: 'https://thumbs.dreamstime.com/b/lata-do-pl%C3%A1stico-dos-filtro-de-%C3%B3leo-do-carro-e-do-%C3%B3leo-de-motor-94129693.jpg',
 };
 
 // ============================================
@@ -368,6 +368,31 @@ export default function App() {
   const root = useReveal();
   const [menu, setMenu] = useState(false);
 
+  const STORES = [
+    {
+      label: 'Matriz e Centro de Distribuições',
+      line1: 'Rod. BR 116, 10040 — KM 10',
+      line2: 'Jangurussu · Fortaleza/CE',
+      tag: 'CD próprio + Loja Conceito',
+      address: 'Rod. BR 116, 10040 - Jangurussu, Fortaleza - CE',
+    },
+    {
+      label: 'Filial Messejana',
+      line1: 'R. José Hipólito, 202',
+      line2: 'Messejana · Fortaleza/CE',
+      tag: 'Filial',
+      address: 'R. Jose Hipolito, 202 - Messejana, Fortaleza - CE',
+    },
+    {
+      label: 'Filial Maracanaú',
+      line1: 'Av. Dr. Mendel Steinbruch, 10403',
+      line2: 'Pajuçara · Maracanaú/CE',
+      tag: 'Filial',
+      address: 'Av. Dr. Mendel Steinbruch, 10403 - Pajucara, Maracanau - CE',
+    },
+  ];
+  const [storeIdx, setStoreIdx] = useState(0);
+
   return (
     <div id="top" ref={root} className="min-h-screen overflow-x-hidden" style={{ background: '#fff', color: C.ink }}>
 
@@ -599,7 +624,7 @@ export default function App() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 justify-items-center">
             {[
-              { Icon: Ico.truck, title: 'LIGOU? PEDIU? CHEGOU!', desc: 'A entrega mais rápida de Fortaleza! Receba seus produtos sem sair de casa, com a eficiência da nossa logística.' },
+              { Icon: Ico.truck, title: 'LIGOU? PEDIU? CHEGOU! 24H', desc: 'A entrega mais rápida de Fortaleza, 24 horas por dia! Receba seus produtos sem sair de casa, com a eficiência da nossa logística.' },
               { Icon: Ico.wa, title: 'WHATSAPP', desc: 'Aqui é mais fácil de comprar! Faça seu pedido diretamente pelo nosso WhatsApp, fale com nossos atendentes.' },
               { Icon: Ico.star, title: 'MELHORES PRODUTOS', desc: 'Aqui você encontra as melhores marcas do mercado! Produtos com a qualidade e variedade que sua demanda precisar.' },
               { Icon: Ico.phone, title: 'ATENDIMENTO PERSONALIZADO', desc: 'Para cada solicitação, nós temos a solução! Contamos com profissionais qualificados para te atender.' },
@@ -1008,19 +1033,38 @@ export default function App() {
             <h2 className="font-black tracking-tight leading-[0.95] mb-6 text-white" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
               Fortaleza e<br />região metropolitana.
             </h2>
-            <p className="text-lg leading-relaxed mb-8 text-white/80">
+            <p className="text-lg leading-relaxed mb-6 text-white/80">
               Do Centro ao Pécem, da Aldeota ao Castelão. Se sua obra tá rodando, a gente chega.
             </p>
-            <div className="rounded-2xl p-6 flex items-start gap-4 mb-6" style={{ background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,204,0,0.25)' }}>
-              <div className="w-12 h-12 rounded-xl grid place-items-center flex-shrink-0" style={{ background: C.yellow }}>
-                <Ico.pin className="w-5 h-5" style={{ color: C.blue }} />
-              </div>
-              <div>
-                <div className="text-[10px] font-black uppercase tracking-wider mb-1" style={{ color: C.yellow }}>Nossa loja</div>
-                <div className="font-black text-lg leading-tight text-white">BR-116, KM 10</div>
-                <div className="text-sm text-white/70">Jangurussu · Fortaleza/CE</div>
-                <div className="text-xs text-white/50 mt-1">CD próprio + Loja Conceito</div>
-              </div>
+            <div className="text-[10px] font-black uppercase tracking-wider mb-3" style={{ color: C.yellow }}>Nossas unidades — clique para ver no mapa</div>
+            <div className="flex flex-col gap-3 mb-6">
+              {STORES.map((s, i) => {
+                const active = storeIdx === i;
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setStoreIdx(i)}
+                    className="rounded-2xl p-4 flex items-start gap-3 text-left transition-all"
+                    style={{
+                      background: active ? 'rgba(255,204,0,0.14)' : 'rgba(255,255,255,0.06)',
+                      backdropFilter: 'blur(8px)',
+                      border: active ? `1px solid ${C.yellow}` : '1px solid rgba(255,255,255,0.12)',
+                      boxShadow: active ? '0 8px 24px rgba(255,204,0,0.18)' : 'none',
+                    }}
+                  >
+                    <div className="w-11 h-11 rounded-xl grid place-items-center flex-shrink-0" style={{ background: active ? C.yellow : 'rgba(255,204,0,0.2)' }}>
+                      <Ico.pin className="w-5 h-5" style={{ color: active ? C.blue : C.yellow }} />
+                    </div>
+                    <div className="flex-1">
+                      <div className="font-black text-base leading-tight text-white">{s.label}</div>
+                      <div className="text-sm text-white/75 mt-0.5">{s.line1}</div>
+                      <div className="text-xs text-white/55">{s.line2}</div>
+                      <div className="text-[10px] font-black uppercase tracking-wider mt-1" style={{ color: C.yellow }}>{s.tag}</div>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
             <CTA size="md" variant="yellow"><Ico.wa className="w-4 h-4" /> Consultar entrega</CTA>
           </div>
@@ -1029,8 +1073,9 @@ export default function App() {
           <div className="fade-up">
             <div className="relative rounded-2xl overflow-hidden" style={{ boxShadow: '0 20px 50px rgba(30,58,138,0.18)', border: `4px solid ${C.yellow}` }}>
               <iframe
-                title="Mapa Lojão dos Parafusos"
-                src="https://www.google.com/maps?q=BR-116,+10040+-+Jangurussu,+Fortaleza+-+CE&output=embed"
+                key={storeIdx}
+                title={`Mapa ${STORES[storeIdx].label}`}
+                src={`https://www.google.com/maps?q=${encodeURIComponent(STORES[storeIdx].address)}&output=embed`}
                 width="100%"
                 style={{ border: 0, display: 'block', height: 'clamp(320px, 50vh, 440px)' }}
                 allowFullScreen=""
@@ -1039,7 +1084,7 @@ export default function App() {
               />
               {/* Card flutuante "Como chegar" */}
               <a
-                href="https://www.google.com/maps/dir/?api=1&destination=BR-116,+10040+-+Jangurussu,+Fortaleza+-+CE"
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(STORES[storeIdx].address)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="absolute bottom-4 left-4 right-4 md:right-auto md:max-w-[280px] bg-white rounded-xl p-4 flex items-center gap-3 hover:-translate-y-0.5 transition-transform"
@@ -1057,30 +1102,15 @@ export default function App() {
           </div>
         </div>
 
-        {/* Bairros atendidos — linha completa */}
+        {/* Área de cobertura */}
         <div className="relative max-w-7xl mx-auto px-5 md:px-6 mt-10">
-          <div className="text-center mb-5">
-            <div className="text-[11px] font-black tracking-widest uppercase" style={{ color: C.yellow }}>
-              <span className="inline-block w-8 h-px align-middle mr-2" style={{ background: C.yellow }} />
-              Bairros atendidos
-              <span className="inline-block w-8 h-px align-middle ml-2" style={{ background: C.yellow }} />
+          <div className="flex justify-center fade-up">
+            <div className="rounded-full px-6 py-3 flex items-center gap-3" style={{ background: C.yellow, boxShadow: '0 10px 30px rgba(255,204,0,0.25)' }}>
+              <Ico.pin className="w-5 h-5" style={{ color: C.blue }} />
+              <span className="font-black text-base sm:text-lg uppercase tracking-wide" style={{ color: C.blue }}>
+                Entrega em toda Fortaleza
+              </span>
             </div>
-          </div>
-          <div className="flex flex-wrap justify-center gap-2 fade-up">
-            {[
-              { name: 'Centro', tag: 'FOR' }, { name: 'Aldeota', tag: 'FOR' }, { name: 'Messejana', tag: 'FOR' },
-              { name: 'Montese', tag: 'FOR' }, { name: 'Castelão', tag: 'FOR' }, { name: 'Antônio Bezerra', tag: 'FOR' },
-              { name: 'Caucaia', tag: 'RMF' }, { name: 'Maracanaú', tag: 'RMF' },
-              { name: 'Eusébio', tag: 'RMF' }, { name: 'Pécem', tag: 'RMF' },
-            ].map((c, i) => (
-              <div key={i} className="rounded-full px-4 py-2 flex items-center gap-2 hover:-translate-y-0.5 transition-transform" style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.18)', backdropFilter: 'blur(8px)' }}>
-                <span className="w-1.5 h-1.5 rounded-full" style={{ background: C.yellow }} />
-                <span className="font-bold text-sm text-white">{c.name}</span>
-                <span className="text-[9px] font-black px-1.5 py-0.5 rounded-full tracking-wider" style={{ background: C.yellow, color: C.blue }}>
-                  {c.tag}
-                </span>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -1192,12 +1222,25 @@ export default function App() {
             <div>
               <div className="flex items-center gap-2 mb-4" style={{ color: C.yellow }}>
                 <Ico.pin className="w-4 h-4" />
-                <span className="text-[11px] font-black tracking-widest uppercase">Endereço</span>
+                <span className="text-[11px] font-black tracking-widest uppercase">Endereços</span>
               </div>
-              <p className="text-white/70 text-sm leading-relaxed">
-                BR-116, KM 10<br />
-                Jangurussu · Fortaleza/CE
-              </p>
+              <div className="space-y-3 text-white/70 text-sm leading-relaxed">
+                <div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wider" style={{ color: C.yellow }}>Matriz</div>
+                  BR-116, KM 10<br />
+                  Jangurussu · Fortaleza/CE
+                </div>
+                <div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wider" style={{ color: C.yellow }}>Filial Messejana</div>
+                  R. José Hipólito, 202<br />
+                  Messejana · Fortaleza/CE
+                </div>
+                <div>
+                  <div className="text-white font-bold text-xs uppercase tracking-wider" style={{ color: C.yellow }}>Filial Maracanaú</div>
+                  Av. Dr. Mendel Steinbruch, 10403<br />
+                  Pajuçara · Maracanaú/CE
+                </div>
+              </div>
             </div>
 
             <div>
