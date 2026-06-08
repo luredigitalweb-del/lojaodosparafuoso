@@ -403,7 +403,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 h-9 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5"><Ico.pin className="w-3.5 h-3.5" style={{ color: C.yellow }} /> BR-116, KM 10 · Jangurussu · Fortaleza/CE</span>
-            <span className="flex items-center gap-1.5"><Ico.clock className="w-3.5 h-3.5" style={{ color: C.yellow }} /> Seg-Sex 7h-18h · Sáb 7h-12h</span>
+            <span className="flex items-center gap-1.5"><Ico.clock className="w-3.5 h-3.5" style={{ color: C.yellow }} /> Seg-Sex 7h-17h · Sáb 7h-12h</span>
           </div>
           <div className="flex items-center gap-4">
             <a href={`tel:+${PHONE}`} className="flex items-center gap-1.5 hover:text-yellow-300 transition-colors">
@@ -524,110 +524,86 @@ export default function App() {
       </nav>
 
       {/* ============================================
-          HERO — imagem de fundo
+          HERO — banner com CTA sobreposto
       ============================================ */}
-      <section className="relative overflow-hidden" style={{ backgroundColor: C.blue }}>
-        {/* Banner DESKTOP (horizontal) */}
-        <div
-          className="hidden md:block absolute inset-0"
-          style={{
-            backgroundImage: `url(/banner.jpg)`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center right',
-            backgroundRepeat: 'no-repeat',
-          }}
+      <section className="relative" style={{ backgroundColor: C.blue }}>
+        {/* Banner DESKTOP */}
+        <img
+          src="/banner.png"
+          alt="Lojão dos Parafusos"
+          className="hidden md:block w-full h-auto"
         />
-        {/* Banner MOBILE (vertical) */}
-        <div
-          className="md:hidden absolute inset-0"
-          style={{
-            backgroundImage: `url(/banner-mobile.jpg)`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center bottom',
-            backgroundRepeat: 'no-repeat',
-          }}
+        {/* Banner MOBILE */}
+        <img
+          src="/banner-mobile.jpg"
+          alt="Lojão dos Parafusos"
+          className="md:hidden w-full h-auto"
         />
 
-        {/* Overlay desktop — escurece lado esquerdo */}
-        <div
-          className="hidden md:block absolute inset-0 pointer-events-none"
-          style={{
-            background: `linear-gradient(90deg, ${C.blue}E6 0%, ${C.blue}99 40%, ${C.blue}33 60%, transparent 80%)`,
-          }}
-        />
-        {/* Overlay mobile — escurece o topo onde fica o texto */}
-        <div
-          className="md:hidden absolute inset-0 pointer-events-none"
-          style={{
-            background: `linear-gradient(180deg, ${C.blue}E6 0%, ${C.blue}AA 35%, ${C.blue}33 55%, transparent 70%)`,
-          }}
-        />
-
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-6 md:px-10 lg:px-16 pt-8 sm:pt-10 md:pt-24 pb-[420px] xs:pb-[460px] sm:pb-[500px] md:pb-32 min-h-[680px] sm:min-h-[740px] md:min-h-[640px] flex items-start md:items-center">
-          <div className="fade-up text-white text-center md:text-left max-w-xl lg:pl-4 w-full md:w-auto">
-            <div className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-black tracking-widest uppercase px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-5 sm:mb-7" style={{ background: C.yellow, color: C.blue }}>
-              <Ico.bolt className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-              <span className="hidden xs:inline">30 anos de mercado · </span>Desde 1995
-            </div>
-
-            <h1 className="font-black leading-[0.95] tracking-tight mb-5 sm:mb-6" style={{ fontSize: 'clamp(1.75rem, 7vw, 4rem)', textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>
-              <span className="block shimmer-yellow">HÁ 30 ANOS,</span>
-              <span className="block text-white">SUA MELHOR SOLUÇÃO</span>
-              <span className="block text-white">DA CASA À <span className="shimmer-yellow">INDÚSTRIA!</span></span>
-            </h1>
-
-            <p className="text-sm sm:text-base md:text-lg text-white/90 leading-relaxed mb-7 sm:mb-8 max-w-md mx-auto md:mx-0" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.5)' }}>
-              Fixadores, ferramentas, EPIs e tudo o que sua obra precisa.{' '}
-              <strong className="text-white">Ligou? Pediu? Chegou!</strong>{' '}
-              A entrega mais rápida de Fortaleza e região.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center md:justify-start gap-2.5 sm:gap-3 w-full md:w-auto max-w-xs mx-auto sm:max-w-none">
-              <CTA size="xl" variant="green" className="w-full sm:w-auto justify-center !py-3 sm:!py-5 !text-sm sm:!text-base !px-5 sm:!px-8 !gap-2">
-                <Ico.wa className="w-4 h-4 sm:w-5 sm:h-5" />
-                Peça Agora!
-                <Ico.arr className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              </CTA>
-              <a
-                href="#produtos"
-                style={{ background: C.yellow, color: C.blue, boxShadow: '0 8px 22px rgba(255,204,0,0.4)' }}
-                className="w-full sm:w-auto inline-flex items-center justify-center font-black uppercase tracking-wide rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98] px-5 sm:px-9 py-3 sm:py-5 text-sm sm:text-base gap-2 sm:gap-3"
-              >
-                Ver Produtos
-                <Ico.arr className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              </a>
-            </div>
-          </div>
+        {/* CTA sobreposto no banner */}
+        <div className="absolute left-1/2 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2 bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-10 z-10">
+          <a
+            href="#produtos"
+            style={{ background: C.yellow, color: C.blue, boxShadow: '0 8px 22px rgba(255,204,0,0.45)' }}
+            className="inline-flex items-center justify-center font-black uppercase tracking-wide rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98] px-5 sm:px-9 py-2.5 sm:py-4 text-xs sm:text-base gap-2 sm:gap-3 whitespace-nowrap"
+          >
+            Ver Produtos
+            <Ico.arr className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          </a>
         </div>
       </section>
 
       {/* ============================================
-          4 FEATURE CARDS (estilo do site)
+          POR QUE ESCOLHER O LOJÃO?
       ============================================ */}
-      <section className="relative py-16 md:py-20 overflow-hidden" style={{ background: C.blue }}>
+      <section className="relative py-14 sm:py-20 md:py-24 overflow-hidden" style={{ background: C.blue }}>
         <div className="absolute inset-0 opacity-[0.07] pointer-events-none" style={{ backgroundImage: `radial-gradient(circle at 2px 2px, ${C.yellow} 1.5px, transparent 0)`, backgroundSize: '28px 28px' }} />
-        <div className="relative max-w-6xl mx-auto px-5 md:px-6">
-          {/* Título da seção */}
+        <div className="relative max-w-7xl mx-auto px-5 md:px-6">
           <div className="text-center mb-10 md:mb-14 fade-up">
-            <div className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-black tracking-widest uppercase px-4 py-1.5 rounded-full mb-4" style={{ background: C.yellow, color: C.blue }}>
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: C.blue }} />
-              Por que o Lojão
-            </div>
-            <h2 className="font-black tracking-tight leading-[0.95] text-white mb-3" style={{ fontSize: 'clamp(1.75rem, 5vw, 3rem)' }}>
-              Aqui é mais fácil de comprar.
+            <h2 className="font-black tracking-tight leading-[0.95] text-white" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.5rem)' }}>
+              POR QUE ESCOLHER O <span style={{ color: C.yellow }}>LOJÃO?</span>
             </h2>
-            <p className="text-sm sm:text-base text-white/70 max-w-xl mx-auto">
-              Atendimento, entrega e variedade que sua obra precisa — tudo num lugar só.
-            </p>
             <div className="mx-auto mt-5 h-1 w-16 rounded-full" style={{ background: C.yellow }} />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 justify-items-center">
+          {/* Mobile: carrossel horizontal · Desktop: grid */}
+          <div className="flex sm:hidden gap-4 overflow-x-auto snap-x snap-mandatory pb-4 px-1 -mx-1 no-scrollbar fade-up">
             {[
-              { Icon: Ico.truck, title: 'LIGOU? PEDIU? CHEGOU! 24H', desc: 'A entrega mais rápida de Fortaleza, 24 horas por dia! Receba seus produtos sem sair de casa, com a eficiência da nossa logística.' },
-              { Icon: Ico.wa, title: 'WHATSAPP', desc: 'Aqui é mais fácil de comprar! Faça seu pedido diretamente pelo nosso WhatsApp, fale com nossos atendentes.' },
-              { Icon: Ico.star, title: 'MELHORES PRODUTOS', desc: 'Aqui você encontra as melhores marcas do mercado! Produtos com a qualidade e variedade que sua demanda precisar.' },
-              { Icon: Ico.phone, title: 'ATENDIMENTO PERSONALIZADO', desc: 'Para cada solicitação, nós temos a solução! Contamos com profissionais qualificados para te atender.' },
+              { Icon: Ico.truck, title: 'ENTREGA EM ATÉ 24H', desc: 'A entrega mais rápida da cidade. Receba seus produtos sem sair de casa.' },
+              { Icon: Ico.bolt, title: 'PARCELAMENTO SEM JUROS', desc: 'Pague no boleto ou cartão, dividido sem nenhum acréscimo no valor.' },
+              { Icon: Ico.star, title: 'DESCONTOS À VISTA', desc: 'No PIX ou dinheiro, você garante até 10% OFF no seu pedido.' },
+              { Icon: Ico.phone, title: 'ATENDIMENTO PERSONALIZADO', desc: 'Para pessoa física ou jurídica — atendemos do hobista à indústria.' },
+              { Icon: Ico.pin, title: 'RETIRA RÁPIDO NA LOJA', desc: 'Faça seu pedido e retire na loja sem fila, com agilidade total.' },
+              { Icon: Ico.hand, title: 'AQUELE CAFEZINHO!', desc: 'E tem aquele cafezinho esperando por você quando vier visitar a gente.' },
+            ].map(({ Icon, title, desc }, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl p-6 text-center transition-all duration-300 flex-shrink-0 snap-center"
+                style={{ boxShadow: '0 10px 30px rgba(30,58,138,0.10)', border: `2px solid ${C.bg}`, width: 'calc(85vw - 1rem)', maxWidth: '320px' }}
+              >
+                <div className="w-16 h-16 rounded-full grid place-items-center mx-auto mb-4" style={{ background: C.blue }}>
+                  <Icon className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="font-black text-base tracking-tight mb-3 uppercase" style={{ color: C.blue }}>
+                  {title}
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#666' }}>
+                  {desc}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center text-white/60 text-xs sm:hidden -mt-2 mb-2">← arraste para o lado →</div>
+
+          {/* Desktop: grid normal */}
+          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center">
+            {[
+              { Icon: Ico.truck, title: 'ENTREGA EM ATÉ 24H', desc: 'A entrega mais rápida da cidade. Receba seus produtos sem sair de casa.' },
+              { Icon: Ico.bolt, title: 'PARCELAMENTO SEM JUROS', desc: 'Pague no boleto ou cartão, dividido sem nenhum acréscimo no valor.' },
+              { Icon: Ico.star, title: 'DESCONTOS À VISTA', desc: 'No PIX ou dinheiro, você garante até 10% OFF no seu pedido.' },
+              { Icon: Ico.phone, title: 'ATENDIMENTO PERSONALIZADO', desc: 'Para pessoa física ou jurídica — atendemos do hobista à indústria.' },
+              { Icon: Ico.pin, title: 'RETIRA RÁPIDO NA LOJA', desc: 'Faça seu pedido e retire na loja sem fila, com agilidade total.' },
+              { Icon: Ico.hand, title: 'AQUELE CAFEZINHO!', desc: 'E tem aquele cafezinho esperando por você quando vier visitar a gente.' },
             ].map(({ Icon, title, desc }, i) => (
               <div
                 key={i}
@@ -770,7 +746,7 @@ export default function App() {
       </section>
 
       {/* ============================================
-          QUEM SOMOS / 30 ANOS
+          QUEM SOMOS / 31 ANOS
       ============================================ */}
       <section id="sobre" className="py-14 sm:py-20 md:py-28 relative overflow-hidden text-white" style={{ background: C.blue }}>
         {/* Padrão de pontos amarelos sutil */}
@@ -783,25 +759,43 @@ export default function App() {
               Quem Somos
             </div>
             <h2 className="font-black tracking-tight leading-[0.95] mb-6 text-white" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
-              30 anos abastecendo<br />Fortaleza.
+              31 anos abastecendo<br />Fortaleza.
             </h2>
             <p className="text-lg leading-relaxed mb-5 text-white/80">
               Começamos em 1995 como uma pequena loja de bairro e hoje somos referência em fixadores, ferramentas e EPIs em todo o estado do Ceará.
             </p>
-            <p className="text-lg leading-relaxed mb-8 text-white/80">
+            <p className="text-lg leading-relaxed mb-6 text-white/80">
               Em 2024 inauguramos nosso <strong style={{ color: C.yellow }}>Centro de Distribuição próprio</strong> e a <strong style={{ color: C.yellow }}>Loja Conceito</strong> na BR-116, garantindo mais estoque e mais agilidade pra você.
             </p>
 
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-8">
+            {/* Destaque ENTREGA MAIS RÁPIDA */}
+            <div className="rounded-2xl p-5 sm:p-6 mb-8 flex items-center gap-4 relative overflow-hidden" style={{ background: C.yellow, boxShadow: '0 12px 32px rgba(255,204,0,0.25)' }}>
+              <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full" style={{ background: `${C.blue}1A` }} />
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl grid place-items-center flex-shrink-0 relative" style={{ background: C.blue }}>
+                <Ico.truck className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
+              </div>
+              <div className="relative">
+                <div className="text-[10px] sm:text-xs font-black tracking-widest uppercase" style={{ color: C.blue }}>★ Nosso diferencial</div>
+                <div className="font-black text-lg sm:text-2xl leading-tight uppercase" style={{ color: C.blue }}>
+                  A entrega mais rápida<br className="hidden sm:block" /> de Fortaleza · 24h
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
               {[
-                { n: '30+', label: 'Anos de história' },
-                { n: '+5mil', label: 'Clientes atendidos' },
-                { n: '10mil+', label: 'Itens em estoque' },
-                { n: '100%', label: 'Atendimento humano' },
-              ].map((s, i) => (
-                <div key={i} className="rounded-xl p-3.5 sm:p-4 border-l-4 flex flex-col justify-between min-h-[92px] sm:min-h-[100px]" style={{ background: 'rgba(255,255,255,0.08)', borderColor: C.yellow, backdropFilter: 'blur(8px)' }}>
-                  <div className="font-black text-2xl sm:text-3xl leading-none" style={{ color: C.yellow }}>{s.n}</div>
-                  <div className="text-[10px] sm:text-xs uppercase tracking-wider font-bold mt-2 text-white/70 leading-tight">{s.label}</div>
+                { Icon: Ico.star, n: '31+', label: 'Anos de história' },
+                { Icon: Ico.hand, n: '+5mil', label: 'Clientes atendidos' },
+                { Icon: Ico.bolt, n: '10mil+', label: 'Itens em estoque' },
+                { Icon: Ico.check, n: '100%', label: 'Atendimento humano' },
+              ].map(({ Icon, n, label }, i) => (
+                <div key={i} className="rounded-2xl p-4 sm:p-5 text-center relative overflow-hidden group transition-all hover:-translate-y-1" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,204,0,0.25)', backdropFilter: 'blur(8px)' }}>
+                  <div className="absolute -right-6 -top-6 w-20 h-20 rounded-full opacity-30 transition-transform group-hover:scale-125" style={{ background: `${C.yellow}33` }} />
+                  <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl grid place-items-center mx-auto mb-2.5" style={{ background: C.yellow }}>
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: C.blue }} />
+                  </div>
+                  <div className="relative font-black text-2xl sm:text-3xl leading-none" style={{ color: C.yellow }}>{n}</div>
+                  <div className="relative text-[10px] sm:text-xs uppercase tracking-wider font-bold mt-2 text-white/80 leading-tight">{label}</div>
                 </div>
               ))}
             </div>
@@ -830,77 +824,11 @@ export default function App() {
       </section>
 
       {/* ============================================
-          PRA QUEM É
-      ============================================ */}
-      <section className="py-14 sm:py-20 md:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="text-center mb-14 fade-up">
-            <div className="inline-block text-[11px] font-black tracking-widest uppercase px-4 py-2 rounded-full mb-4" style={{ background: C.yellow, color: C.blue }}>
-              Pra quem é
-            </div>
-            <h2 className="font-black tracking-tight leading-[0.95]" style={{ color: C.blue, fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
-              Da grande obra ao<br />fim de semana.
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-5">
-            <div className="rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 fade-up relative overflow-hidden text-white" style={{ background: C.blue }}>
-              <div className="absolute -right-20 -top-20 w-60 h-60 rounded-full" style={{ background: `${C.yellow}1A` }} />
-              <div className="relative">
-                <div className="inline-block text-[11px] font-black tracking-widest uppercase px-3 py-1 rounded-full mb-6" style={{ background: C.yellow, color: C.blue }}>
-                  Empresas · B2B
-                </div>
-                <h3 className="font-black text-3xl md:text-4xl tracking-tight mb-4 leading-tight">
-                  Volume e regularidade pra quem produz.
-                </h3>
-                <p className="text-white/80 leading-relaxed mb-6">
-                  Atendimento dedicado, prazos previsíveis e estoque amplo. Você produz, a gente abastece.
-                </p>
-                <div className="grid grid-cols-2 gap-2.5 text-sm mb-7">
-                  {['Indústrias', 'Construtoras', 'Metalúrgicas', 'Vidraçarias', 'Pré-moldados', 'Postos de molas'].map((t) => (
-                    <div key={t} className="flex items-center gap-2 font-semibold text-white/90">
-                      <Ico.check className="w-4 h-4 flex-shrink-0" style={{ color: C.yellow }} />
-                      {t}
-                    </div>
-                  ))}
-                </div>
-                <CTA size="md" variant="yellow"><Ico.wa className="w-4 h-4" /> Falar com vendedor</CTA>
-              </div>
-            </div>
-
-            <div className="rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 fade-up relative overflow-hidden" style={{ background: C.yellow }}>
-              <div className="absolute -right-20 -top-20 w-60 h-60 rounded-full" style={{ background: `${C.blue}1A` }} />
-              <div className="relative">
-                <div className="inline-block text-[11px] font-black tracking-widest uppercase px-3 py-1 rounded-full mb-6 text-white" style={{ background: C.blue }}>
-                  Profissional · B2C
-                </div>
-                <h3 className="font-black text-3xl md:text-4xl tracking-tight mb-4 leading-tight" style={{ color: C.blue }}>
-                  Atendimento direto, preço de fonte.
-                </h3>
-                <p className="leading-relaxed mb-6" style={{ color: 'rgba(30,58,138,0.8)' }}>
-                  Tá fazendo bico, reforma, ou só gosta de mexer com ferramenta? Aqui você acha tudo.
-                </p>
-                <div className="grid grid-cols-2 gap-2.5 text-sm mb-7">
-                  {['Pedreiros', 'Serralheiros', 'Eletricistas', 'Marceneiros', 'Hobistas', 'Makers'].map((t) => (
-                    <div key={t} className="flex items-center gap-2 font-semibold" style={{ color: C.blue }}>
-                      <Ico.check className="w-4 h-4 flex-shrink-0" />
-                      {t}
-                    </div>
-                  ))}
-                </div>
-                <CTA size="md" variant="blue"><Ico.wa className="w-4 h-4" /> Falar com vendedor</CTA>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================
           REDES SOCIAIS
       ============================================ */}
-      <section className="py-14 sm:py-20 md:py-28 relative overflow-hidden text-white" style={{ background: C.blue }}>
-        <div className="absolute inset-0 pointer-events-none opacity-[0.07]" style={{ backgroundImage: `radial-gradient(circle at 1px 1px, ${C.yellow} 1.5px, transparent 0)`, backgroundSize: '24px 24px' }} />
-        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: 'rgba(220,39,67,0.18)', filter: 'blur(80px)' }} />
+      <section className="py-14 sm:py-20 md:py-28 relative overflow-hidden bg-white">
+        <div className="absolute inset-0 pointer-events-none opacity-[0.05]" style={{ backgroundImage: `radial-gradient(circle at 1px 1px, ${C.blue} 1.5px, transparent 0)`, backgroundSize: '24px 24px' }} />
+        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: 'rgba(220,39,67,0.12)', filter: 'blur(80px)' }} />
 
         <div className="relative max-w-7xl mx-auto px-5 md:px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* IPHONE — esquerda */}
@@ -943,7 +871,7 @@ export default function App() {
               Nos Siga nas Redes
             </div>
 
-            <h2 className="font-black tracking-tight leading-[0.95] mb-6 text-white" style={{ fontSize: 'clamp(2rem, 4.5vw, 3.6rem)' }}>
+            <h2 className="font-black tracking-tight leading-[0.95] mb-6" style={{ color: C.blue, fontSize: 'clamp(2rem, 4.5vw, 3.6rem)' }}>
               Tá rolando muita<br />
               coisa boa no nosso{' '}
               <span style={{
@@ -954,8 +882,8 @@ export default function App() {
               }}>Instagram.</span>
             </h2>
 
-            <p className="text-base md:text-lg mb-8 max-w-md mx-auto lg:mx-0 text-white/80">
-              Promoções "Preço Impossível", lançamentos, dicas de obra e tudo o que sai novo direto da loja. <strong className="text-white">Não fica de fora!</strong>
+            <p className="text-base md:text-lg mb-8 max-w-md mx-auto lg:mx-0" style={{ color: '#555' }}>
+              Promoções "Preço Impossível", lançamentos, dicas de obra e tudo o que sai novo direto da loja. <strong style={{ color: C.blue }}>Não fica de fora!</strong>
             </p>
 
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
@@ -977,42 +905,11 @@ export default function App() {
                 href="https://instagram.com/lojaodosparafusosce"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-bold hover:underline text-white/90"
+                className="text-sm font-bold hover:underline"
+                style={{ color: C.blue }}
               >
                 @lojaodosparafusosce
               </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================
-          CTA BANNER AMARELO
-      ============================================ */}
-      <section className="py-10 md:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-5 md:px-6">
-          <div className="relative rounded-3xl p-8 md:p-14 overflow-hidden fade-up" style={{ background: C.yellow }}>
-            <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full" style={{ background: `${C.blue}11` }} />
-            <div className="absolute -left-16 -bottom-16 w-60 h-60 rounded-full" style={{ background: '#fff', opacity: 0.4 }} />
-            <div className="relative grid md:grid-cols-[1.4fr_1fr] gap-8 items-center">
-              <div>
-                <div className="inline-block text-[11px] font-black tracking-widest uppercase px-3 py-1 rounded-full mb-4 text-white" style={{ background: C.blue }}>
-                  Aproveite
-                </div>
-                <h3 className="font-black text-3xl md:text-5xl tracking-tighter leading-[1] mb-4" style={{ color: C.blue }}>
-                  Precisa de orçamento agora?
-                </h3>
-                <p className="text-lg" style={{ color: 'rgba(30,58,138,0.85)' }}>
-                  Manda a lista no WhatsApp. A gente responde com preço e prazo na hora.
-                </p>
-              </div>
-              <div className="md:justify-self-end">
-                <CTA size="xl" variant="green">
-                  <Ico.wa className="w-5 h-5" />
-                  Fazer orçamento
-                  <Ico.arr className="w-4 h-4" />
-                </CTA>
-              </div>
             </div>
           </div>
         </div>
@@ -1215,7 +1112,7 @@ export default function App() {
             <div>
               <Logo size="md" />
               <p className="mt-5 text-white/50 text-sm leading-relaxed">
-                Há 30 anos abastecendo Fortaleza com fixadores, ferramentas e EPIs.
+                Há 31 anos abastecendo Fortaleza com fixadores, ferramentas e EPIs.
               </p>
             </div>
 
@@ -1249,7 +1146,7 @@ export default function App() {
                 <span className="text-[11px] font-black tracking-widest uppercase">Atendimento</span>
               </div>
               <p className="text-white/70 text-sm leading-relaxed">
-                Seg a Sex · 7h às 18h<br />
+                Seg a Sex · 7h às 17h<br />
                 Sábado · 7h às 12h
               </p>
             </div>
