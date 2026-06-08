@@ -371,7 +371,7 @@ export default function App() {
   const STORES = [
     {
       label: 'Matriz e Centro de Distribuições',
-      line1: 'Rod. BR 116, 10040 — KM 10',
+      line1: 'BR-116, 10040, KM 10',
       line2: 'Jangurussu · Fortaleza/CE',
       tag: 'CD próprio + Loja Conceito',
       address: 'Rod. BR 116, 10040 - Jangurussu, Fortaleza - CE',
@@ -402,7 +402,7 @@ export default function App() {
       <div className="hidden md:block text-white text-xs" style={{ background: C.blueDeep }}>
         <div className="max-w-7xl mx-auto px-6 h-9 flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5"><Ico.pin className="w-3.5 h-3.5" style={{ color: C.yellow }} /> BR-116, KM 10 · Jangurussu · Fortaleza/CE</span>
+            <span className="flex items-center gap-1.5"><Ico.pin className="w-3.5 h-3.5" style={{ color: C.yellow }} /> BR-116, 10040, KM 10 · Jangurussu · Fortaleza/CE</span>
             <span className="flex items-center gap-1.5"><Ico.clock className="w-3.5 h-3.5" style={{ color: C.yellow }} /> Seg-Sex 7h-17h · Sáb 7h-12h</span>
           </div>
           <div className="flex items-center gap-4">
@@ -1124,7 +1124,7 @@ export default function App() {
               <div className="space-y-3 text-white/70 text-sm leading-relaxed">
                 <div>
                   <div className="text-white font-bold text-xs uppercase tracking-wider" style={{ color: C.yellow }}>Matriz</div>
-                  BR-116, KM 10<br />
+                  BR-116, 10040, KM 10<br />
                   Jangurussu · Fortaleza/CE
                 </div>
                 <div>
