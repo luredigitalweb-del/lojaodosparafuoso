@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Promoções · Lojão dos Parafusos</title>
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <meta name="theme-color" content="#1E3A8A" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #f6f7fb;
+      color: #1f2937;
+      -webkit-font-smoothing: antialiased;
+    }
+    .header {
+      background: #1E3A8A;
+      color: #fff;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #fff;
+    }
+    .logo img {
+      height: 48px;
+      width: auto;
+    }
+    .logo-text {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.1rem;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      border: 1px solid rgba(255,204,0,0.3);
+      transition: all 0.2s;
+    }
+    .back-link:hover { background: #FFCC00; color: #1E3A8A; border-color: #FFCC00; }
+
+    .hero {
+      background: linear-gradient(135deg, #1E3A8A 0%, #1e40af 100%);
+      color: #fff;
+      padding: 3rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 2px 2px, #FFCC00 1.5px, transparent 0);
+      background-size: 28px 28px;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; max-width: 900px; margin: 0 auto; }
+    .badge-tag {
+      display: inline-block;
+      background: #FFCC00;
+      color: #1E3A8A;
+      font-weight: 900;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+      margin-bottom: 1rem;
+    }
+    .hero h1 .yellow { color: #FFCC00; }
+    .hero p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: -2.5rem auto 0;
+      padding: 0 1rem 4rem;
+      position: relative;
+      z-index: 10;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.25rem;
+      box-shadow: 0 8px 24px rgba(30,58,138,0.08);
+      border: 2px solid #f0f2f8;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 36px rgba(30,58,138,0.14);
+      border-color: #FFCC00;
+    }
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      align-self: flex-start;
+      background: #FFCC00;
+      color: #1E3A8A;
+      font-weight: 900;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+    }
+    .card-name {
+      font-weight: 800;
+      font-size: 0.98rem;
+      line-height: 1.3;
+      color: #1E3A8A;
+      letter-spacing: -0.01em;
+      flex: 1;
+    }
+    .card-brand {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888;
+    }
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: #25D366;
+      color: #fff;
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.78rem;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(37,211,102,0.28);
+      transition: all 0.2s;
+    }
+    .card-cta:hover { transform: translateY(-1px); filter: brightness(1.05); }
+
+    .footer-cta {
+      background: #1E3A8A;
+      color: #fff;
+      padding: 3rem 1.5rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .footer-cta h2 {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .footer-cta p {
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 1.75rem;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .footer-cta .big-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #25D366;
+      color: #fff;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 1rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      box-shadow: 0 10px 28px rgba(37,211,102,0.4);
+      transition: all 0.2s;
+    }
+    .footer-cta .big-cta:hover { transform: translateY(-2px); }
+
+    .wa-icon { width: 16px; height: 16px; fill: currentColor; }
+
+    @media (max-width: 640px) {
+      .header { padding: 1rem; }
+      .logo-text { display: none; }
+      .hero { padding: 2.5rem 1rem 3rem; }
+      .container { padding: 0 0.75rem 3rem; }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.75rem; }
+      .card { padding: 1rem; gap: 0.6rem; }
+      .card-name { font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <img src="/logo.png" alt="Lojão dos Parafusos" />
+        <span class="logo-text">Lojão dos Parafusos</span>
+      </a>
+      <a href="/" class="back-link">← Voltar pra LP</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="badge-tag">⚡ Preço Impossível</span>
+      <h1>Produtos em <span class="yellow">PROMOÇÃO</span></h1>
+      <p>Confira nossa seleção exclusiva de produtos com preços imbatíveis. Clique no item e fale direto com a gente pelo WhatsApp pra garantir o seu!</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <section class="footer-cta">
+    <h2>Não achou o que procura?</h2>
+    <p>Tem milhares de outros itens em estoque. Manda a lista no WhatsApp que a gente responde com preço e prazo na hora.</p>
+    <a class="big-cta" href="https://wa.me/558532763240?text=Ol%C3%A1!%20Quero%20fazer%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer">
+      <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.6 6.3A7.85 7.85 0 0012 4a7.94 7.94 0 00-6.9 11.9L4 20l4.2-1.1a7.94 7.94 0 0011.7-7 7.85 7.85 0 00-2.3-5.6zM12 18.5a6.6 6.6 0 01-3.4-.9l-.2-.1-2.5.7.7-2.4-.2-.2A6.6 6.6 0 1118.6 12 6.6 6.6 0 0112 18.5zm3.6-4.9c-.2-.1-1.2-.6-1.4-.6s-.3-.1-.4.1l-.6.6c-.1.1-.2.2-.4 0a5.4 5.4 0 01-1.6-1 6.1 6.1 0 01-1.1-1.4c-.1-.2 0-.3.1-.4l.3-.4.2-.3v-.3l-.6-1.4c-.1-.4-.3-.3-.4-.3h-.4a.7.7 0 00-.5.2 2 2 0 00-.6 1.5 3.5 3.5 0 00.7 1.9 7.9 7.9 0 003.1 2.7c.4.2.8.3 1 .4a2.4 2.4 0 001.1.1 1.9 1.9 0 001.2-.9 1.5 1.5 0 00.1-.9c-.1-.1-.2-.2-.4-.3z"/></svg>
+      Fazer Orçamento
+    </a>
+  </section>
+
+  <script>
+    const products = [
+      { name: 'Carro de Mão 50L Azul', brand: 'Tramontina' },
+      { name: 'Alicate Universal 8" Master', brand: 'Tramontina' },
+      { name: 'Machadinha c/ Unha', brand: 'Tramontina' },
+      { name: 'Facão 12" 26600/012', brand: 'Tramontina' },
+      { name: 'Moto Compressor MC-7.6/21LT 2.0HP', brand: 'Chiaperini' },
+      { name: 'Furadeira Bancada FB 13MM-1/2"', brand: 'Chiaperini' },
+      { name: 'Roda Pneu Maciço Borracha Rec — 3.25 x 8" L.Leve', brand: 'Universal' },
+      { name: 'Nível de Alumínio 12"', brand: 'Starrett' },
+      { name: 'Mini Arco Serra c/ Lâmina 12"', brand: 'Starrett' },
+      { name: 'Paquímetro 300MM-12" Aço Inox', brand: 'ZAAS Precision' },
+      { name: 'Solda MIG sem Gás 0.80MM 1KG', brand: 'ESAB' },
+      { name: 'Bateria 20V MAX Li-Ion Premium 5Ah', brand: 'DEWALT' },
+      { name: 'Esmerilhadeira 4.1/2 Angular 800W DWE4020B2', brand: 'DEWALT' },
+      { name: 'Lixadeira Politriz 7" DWP849XB2', brand: 'DEWALT' },
+      { name: 'Parafusadeira Impacto Brushless 1/4" 20V', brand: 'DEWALT' },
+      { name: 'Organizador Sortmaster Light STST14026', brand: 'STANLEY' },
+      { name: 'Kit Esponja Mágica + Espuma Limpa Tudo 400ML', brand: 'Tekbond' },
+      { name: 'Anti-Ferrugem 300ML', brand: 'Tekbond' },
+      { name: 'Jogo Chave Fenda + Bits + Soquetes 39 pcs', brand: 'Robust' },
+      { name: 'Jogo de Ferramentas DIY 85 pcs 4000C', brand: 'Robust' },
+      { name: 'Jogo Oficina Master 178 pcs 5000R', brand: 'Robust' },
+    ];
+
+    const phone = '558532763240';
+    const grid = document.getElementById('grid');
+    const waIcon = '<svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.6 6.3A7.85 7.85 0 0012 4a7.94 7.94 0 00-6.9 11.9L4 20l4.2-1.1a7.94 7.94 0 0011.7-7 7.85 7.85 0 00-2.3-5.6zM12 18.5a6.6 6.6 0 01-3.4-.9l-.2-.1-2.5.7.7-2.4-.2-.2A6.6 6.6 0 1118.6 12 6.6 6.6 0 0112 18.5zm3.6-4.9c-.2-.1-1.2-.6-1.4-.6s-.3-.1-.4.1l-.6.6c-.1.1-.2.2-.4 0a5.4 5.4 0 01-1.6-1 6.1 6.1 0 01-1.1-1.4c-.1-.2 0-.3.1-.4l.3-.4.2-.3v-.3l-.6-1.4c-.1-.4-.3-.3-.4-.3h-.4a.7.7 0 00-.5.2 2 2 0 00-.6 1.5 3.5 3.5 0 00.7 1.9 7.9 7.9 0 003.1 2.7c.4.2.8.3 1 .4a2.4 2.4 0 001.1.1 1.9 1.9 0 001.2-.9 1.5 1.5 0 00.1-.9c-.1-.1-.2-.2-.4-.3z"/></svg>';
+
+    grid.innerHTML = products.map(p => {
+      const msg = encodeURIComponent(`Olá! Tenho interesse no produto: ${p.name} — ${p.brand}. Pode me passar o preço?`);
+      return `
+        <div class="card">
+          <span class="card-tag">⚡ Promoção</span>
+          <div class="card-name">${p.name}</div>
+          <div class="card-brand">${p.brand}</div>
+          <a class="card-cta" href="https://wa.me/${phone}?text=${msg}" target="_blank" rel="noopener noreferrer">
+            ${waIcon} Quero esse
+          </a>
+        </div>
+      `;
+    }).join('');
+  </script>
+</body>
+</html>

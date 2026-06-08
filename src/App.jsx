@@ -543,11 +543,13 @@ export default function App() {
         {/* CTA sobreposto no banner */}
         <div className="absolute left-1/2 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2 bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-10 z-10">
           <a
-            href="#produtos"
+            href="/promocoes.html"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{ background: C.yellow, color: C.blue, boxShadow: '0 8px 22px rgba(255,204,0,0.45)' }}
             className="inline-flex items-center justify-center font-black uppercase tracking-wide rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98] px-5 sm:px-9 py-2.5 sm:py-4 text-xs sm:text-base gap-2 sm:gap-3 whitespace-nowrap"
           >
-            Ver Produtos
+            Ver Produtos em Promoção
             <Ico.arr className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </a>
         </div>
