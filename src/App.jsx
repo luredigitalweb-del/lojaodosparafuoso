@@ -1124,21 +1124,39 @@ export default function App() {
                 <span className="text-[11px] font-black tracking-widest uppercase">Endereços</span>
               </div>
               <div className="space-y-3 text-white/70 text-sm leading-relaxed">
-                <div>
-                  <div className="text-white font-bold text-xs uppercase tracking-wider" style={{ color: C.yellow }}>Matriz</div>
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('BR-116, 10040 - Jangurussu, Fortaleza - CE')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:text-white transition-colors group"
+                >
+                  <div className="font-bold text-xs uppercase tracking-wider" style={{ color: C.yellow }}>Matriz</div>
                   BR-116, 10040, KM 10<br />
                   Jangurussu · Fortaleza/CE
-                </div>
-                <div>
-                  <div className="text-white font-bold text-xs uppercase tracking-wider" style={{ color: C.yellow }}>Filial Messejana</div>
+                  <span className="block text-[10px] font-bold mt-0.5 opacity-70 group-hover:opacity-100" style={{ color: C.yellow }}>→ Ver no mapa</span>
+                </a>
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('R. Jose Hipolito, 202 - Messejana, Fortaleza - CE')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:text-white transition-colors group"
+                >
+                  <div className="font-bold text-xs uppercase tracking-wider" style={{ color: C.yellow }}>Filial Messejana</div>
                   R. José Hipólito, 202<br />
                   Messejana · Fortaleza/CE
-                </div>
-                <div>
-                  <div className="text-white font-bold text-xs uppercase tracking-wider" style={{ color: C.yellow }}>Filial Maracanaú</div>
+                  <span className="block text-[10px] font-bold mt-0.5 opacity-70 group-hover:opacity-100" style={{ color: C.yellow }}>→ Ver no mapa</span>
+                </a>
+                <a
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Av. Dr. Mendel Steinbruch, 10403 - Pajucara, Maracanau - CE')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block hover:text-white transition-colors group"
+                >
+                  <div className="font-bold text-xs uppercase tracking-wider" style={{ color: C.yellow }}>Filial Maracanaú</div>
                   Av. Dr. Mendel Steinbruch, 10403<br />
                   Pajuçara · Maracanaú/CE
-                </div>
+                  <span className="block text-[10px] font-bold mt-0.5 opacity-70 group-hover:opacity-100" style={{ color: C.yellow }}>→ Ver no mapa</span>
+                </a>
               </div>
             </div>
 
