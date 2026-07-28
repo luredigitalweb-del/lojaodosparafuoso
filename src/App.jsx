@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 
 // ============================================
 // CONFIG
@@ -36,29 +36,27 @@ const IMG = {
   automotivo: 'https://thumbs.dreamstime.com/b/lata-do-pl%C3%A1stico-dos-filtro-de-%C3%B3leo-do-carro-e-do-%C3%B3leo-de-motor-94129693.jpg',
 };
 
-// Banners do hero. `pos` = object-position por breakpoint (as artes têm
-// proporções diferentes, então cada uma é enquadrada no ponto certo).
+// Banners do hero. As três artes têm proporções bem diferentes, então:
+// no desktop cada uma é recortada (object-cover) no ponto certo via `pos`;
+// no mobile todas aparecem inteiras (object-contain) sobre um fundo borrado.
 const HERO_SLIDES = [
   {
     id: 'craques',
-    src: '/banner.png',
+    src: '/banner.webp',
     alt: 'Craques do Brasil — uma seleção de campeões para você',
-    posDesktop: 'center',
-    posMobile: 'center',
+    pos: 'center',
   },
   {
     id: 'dia-dos-pais',
-    src: '/banner-dia-dos-pais.jpg',
+    src: '/banner-dia-dos-pais.webp',
     alt: 'Pai para toda obra — é mais que presente, é Bosch!',
-    posDesktop: 'center 68%',
-    posMobile: 'center 62%',
+    pos: 'center 68%',
   },
   {
     id: 'epis',
-    src: '/banner-epis.png',
+    src: '/banner-epis.webp',
     alt: 'EPIs de qualidade — proteção, conforto e confiança para trabalhar com mais segurança',
-    posDesktop: 'center',
-    posMobile: '76% center',
+    pos: '45% center',
   },
 ];
 const HERO_INTERVAL = 6000; // tempo de cada banner no ar
@@ -423,19 +421,10 @@ export default function App() {
 
   // ---- Carrossel do hero ----
   const [heroIdx, setHeroIdx] = useState(0);
-  const [heroWide, setHeroWide] = useState(false); // md+ → usa o enquadramento desktop
   const [heroDragging, setHeroDragging] = useState(false);
   const [heroNudge, setHeroNudge] = useState(0); // retorno visual enquanto arrasta
   const heroStartX = useRef(null);
   const heroMoved = useRef(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 768px)');
-    const sync = () => setHeroWide(mq.matches);
-    sync();
-    mq.addEventListener('change', sync);
-    return () => mq.removeEventListener('change', sync);
-  }, []);
 
   const heroGo = (i) => setHeroIdx((i + HERO_SLIDES.length) % HERO_SLIDES.length);
 
@@ -641,9 +630,16 @@ export default function App() {
         aria-roledescription="carrossel"
         aria-label="Destaques do Lojão dos Parafusos"
       >
+        {/* Título da página. As artes do hero são imagens, então o H1 fica
+            acessível a leitores de tela e ao Google sem alterar o visual. */}
+        <h1 className="sr-only">
+          Lojão dos Parafusos — parafusos, fixadores, ferramentas e EPIs em Fortaleza,
+          com entrega em até 24h
+        </h1>
+
         {/* Palco: proporção fixa por breakpoint pra não pular altura entre os slides */}
         <div
-          className="relative w-full aspect-[17/10] md:aspect-[11/5]"
+          className="relative w-full aspect-[21/10] sm:aspect-[11/5]"
           style={{
             transform: `translateX(${heroNudge}px)`,
             transition: heroDragging ? 'none' : 'transform 350ms cubic-bezier(0.22, 1, 0.36, 1)',
@@ -661,22 +657,23 @@ export default function App() {
               className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out"
               style={{
                 opacity: i === heroIdx ? 1 : 0,
-                objectPosition: heroWide ? s.posDesktop : s.posMobile,
+                objectPosition: s.pos,
                 zIndex: i === heroIdx ? 1 : 0,
               }}
             />
           ))}
 
-          {/* Véu inferior: contraste do CTA e das bolinhas sobre qualquer arte */}
+          {/* Véu inferior: contraste das bolinhas (e do CTA, no desktop) */}
           <div
-            className="absolute inset-x-0 bottom-0 h-1/3 z-10 pointer-events-none"
-            style={{ background: 'linear-gradient(to top, rgba(8,18,48,0.5), transparent)' }}
+            className="absolute inset-x-0 bottom-0 h-[3rem] sm:h-1/3 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to top, rgba(8,18,48,0.6), transparent)' }}
           />
 
-          {/* Controles sobre a arte. No mobile só as bolinhas — o CTA fica
-              abaixo do banner pra não cobrir os textos das artes. */}
-          <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col items-center gap-3 pb-3 sm:pb-5 md:pb-6 pointer-events-none">
-            <div className="hidden md:block pointer-events-auto">{heroCta('px-9 py-4 text-base gap-3')}</div>
+          {/* Controles sobre a arte. No mobile só as bolinhas — o CTA vai para a
+              barra logo abaixo, senão ele cobre o miolo das peças (o "BRASIL!",
+              o telefone da arte de Bosch, a legenda dos EPIs). */}
+          <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col items-center gap-3 pb-2.5 sm:pb-5 md:pb-6 pointer-events-none">
+            <div className="hidden sm:block pointer-events-auto">{heroCta('px-9 py-4 text-base gap-3')}</div>
 
             {/* Bolinhas indicando o banner atual */}
             <div
@@ -700,10 +697,11 @@ export default function App() {
           </div>
         </div>
 
-        {/* CTA no mobile — logo abaixo do banner */}
-        <div className="md:hidden px-5 py-4">
+        {/* Barra do CTA no mobile: colada na arte, largura cheia, alvo de toque grande */}
+        <div className="sm:hidden px-4 pt-3 pb-4">
           {heroCta('w-full px-5 py-3.5 text-sm gap-2')}
         </div>
+
       </section>
 
       {/* ============================================
