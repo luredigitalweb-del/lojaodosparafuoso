@@ -36,6 +36,34 @@ const IMG = {
   automotivo: 'https://thumbs.dreamstime.com/b/lata-do-pl%C3%A1stico-dos-filtro-de-%C3%B3leo-do-carro-e-do-%C3%B3leo-de-motor-94129693.jpg',
 };
 
+// Banners do hero. `pos` = object-position por breakpoint (as artes têm
+// proporções diferentes, então cada uma é enquadrada no ponto certo).
+const HERO_SLIDES = [
+  {
+    id: 'craques',
+    src: '/banner.png',
+    alt: 'Craques do Brasil — uma seleção de campeões para você',
+    posDesktop: 'center',
+    posMobile: 'center',
+  },
+  {
+    id: 'dia-dos-pais',
+    src: '/banner-dia-dos-pais.jpg',
+    alt: 'Pai para toda obra — é mais que presente, é Bosch!',
+    posDesktop: 'center 68%',
+    posMobile: 'center 62%',
+  },
+  {
+    id: 'epis',
+    src: '/banner-epis.png',
+    alt: 'EPIs de qualidade — proteção, conforto e confiança para trabalhar com mais segurança',
+    posDesktop: 'center',
+    posMobile: '76% center',
+  },
+];
+const HERO_INTERVAL = 6000; // tempo de cada banner no ar
+const HERO_SWIPE = 50;      // px de arrasto pra trocar de banner
+
 // ============================================
 // ÍCONES
 // ============================================
@@ -393,6 +421,81 @@ export default function App() {
   ];
   const [storeIdx, setStoreIdx] = useState(0);
 
+  // ---- Carrossel do hero ----
+  const [heroIdx, setHeroIdx] = useState(0);
+  const [heroWide, setHeroWide] = useState(false); // md+ → usa o enquadramento desktop
+  const [heroDragging, setHeroDragging] = useState(false);
+  const [heroNudge, setHeroNudge] = useState(0); // retorno visual enquanto arrasta
+  const heroStartX = useRef(null);
+  const heroMoved = useRef(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const sync = () => setHeroWide(mq.matches);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
+
+  const heroGo = (i) => setHeroIdx((i + HERO_SLIDES.length) % HERO_SLIDES.length);
+
+  // Autoplay contínuo. setTimeout (e não setInterval) pra que qualquer troca
+  // manual — bolinha ou arrasto — reinicie a contagem do zero.
+  useEffect(() => {
+    if (heroDragging) return;
+    const t = setTimeout(() => heroGo(heroIdx + 1), HERO_INTERVAL);
+    return () => clearTimeout(t);
+  }, [heroIdx, heroDragging]);
+
+  // Arrasto com dedo e com mouse (Pointer Events cobre os dois)
+  const onHeroPointerDown = (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    heroStartX.current = e.clientX;
+    heroMoved.current = false;
+    setHeroDragging(true);
+  };
+
+  const onHeroPointerMove = (e) => {
+    if (heroStartX.current == null) return;
+    const dx = e.clientX - heroStartX.current;
+    // Só captura o ponteiro depois que virou arrasto de verdade — capturar no
+    // pointerdown faria o browser redirecionar o clique das bolinhas e do CTA.
+    if (!heroMoved.current && Math.abs(dx) > 6) {
+      heroMoved.current = true;
+      e.currentTarget.setPointerCapture?.(e.pointerId);
+    }
+    setHeroNudge(Math.max(-56, Math.min(56, dx * 0.35))); // com resistência
+  };
+
+  const endHeroDrag = (e) => {
+    if (heroStartX.current == null) return;
+    const dx = e.clientX - heroStartX.current;
+    heroStartX.current = null;
+    setHeroNudge(0);
+    setHeroDragging(false);
+    if (Math.abs(dx) > HERO_SWIPE) heroGo(heroIdx + (dx < 0 ? 1 : -1));
+  };
+
+  // Um arrasto que termina em cima do botão não deve virar clique
+  const onHeroClickCapture = (e) => {
+    if (heroMoved.current) { e.preventDefault(); e.stopPropagation(); }
+    heroMoved.current = false;
+  };
+
+  // Mesmo botão em dois lugares (sobreposto no desktop, abaixo do banner no mobile)
+  const heroCta = (sizing) => (
+    <a
+      href="/promocoes.html"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ background: C.yellow, color: C.blue, boxShadow: '0 8px 22px rgba(255,204,0,0.45)' }}
+      className={`inline-flex items-center justify-center font-black uppercase tracking-wide rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98] whitespace-nowrap ${sizing}`}
+    >
+      Ver Produtos em Promoção
+      <Ico.arr className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+    </a>
+  );
+
   return (
     <div id="top" ref={root} className="min-h-screen overflow-x-hidden" style={{ background: '#fff', color: C.ink }}>
 
@@ -524,34 +627,82 @@ export default function App() {
       </nav>
 
       {/* ============================================
-          HERO — banner com CTA sobreposto
+          HERO — carrossel de banners com CTA sobreposto
       ============================================ */}
-      <section className="relative" style={{ backgroundColor: C.blue }}>
-        {/* Banner DESKTOP */}
-        <img
-          src="/banner.png"
-          alt="Lojão dos Parafusos"
-          className="hidden md:block w-full h-auto"
-        />
-        {/* Banner MOBILE */}
-        <img
-          src="/banner-mobile.jpg"
-          alt="Lojão dos Parafusos"
-          className="md:hidden w-full h-auto"
-        />
+      <section
+        className="relative overflow-hidden select-none"
+        style={{ backgroundColor: C.blue, touchAction: 'pan-y' }}
+        onPointerDown={onHeroPointerDown}
+        onPointerMove={onHeroPointerMove}
+        onPointerUp={endHeroDrag}
+        onPointerCancel={endHeroDrag}
+        onPointerLeave={endHeroDrag}
+        onClickCapture={onHeroClickCapture}
+        aria-roledescription="carrossel"
+        aria-label="Destaques do Lojão dos Parafusos"
+      >
+        {/* Palco: proporção fixa por breakpoint pra não pular altura entre os slides */}
+        <div
+          className="relative w-full aspect-[17/10] md:aspect-[11/5]"
+          style={{
+            transform: `translateX(${heroNudge}px)`,
+            transition: heroDragging ? 'none' : 'transform 350ms cubic-bezier(0.22, 1, 0.36, 1)',
+            cursor: heroDragging ? 'grabbing' : 'grab',
+          }}
+        >
+          {HERO_SLIDES.map((s, i) => (
+            <img
+              key={s.id}
+              src={s.src}
+              alt={s.alt}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              aria-hidden={i !== heroIdx}
+              draggable={false}
+              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-out"
+              style={{
+                opacity: i === heroIdx ? 1 : 0,
+                objectPosition: heroWide ? s.posDesktop : s.posMobile,
+                zIndex: i === heroIdx ? 1 : 0,
+              }}
+            />
+          ))}
 
-        {/* CTA sobreposto no banner */}
-        <div className="absolute left-1/2 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2 bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-10 z-10">
-          <a
-            href="/promocoes.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ background: C.yellow, color: C.blue, boxShadow: '0 8px 22px rgba(255,204,0,0.45)' }}
-            className="inline-flex items-center justify-center font-black uppercase tracking-wide rounded-lg transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98] px-5 sm:px-9 py-2.5 sm:py-4 text-xs sm:text-base gap-2 sm:gap-3 whitespace-nowrap"
-          >
-            Ver Produtos em Promoção
-            <Ico.arr className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-          </a>
+          {/* Véu inferior: contraste do CTA e das bolinhas sobre qualquer arte */}
+          <div
+            className="absolute inset-x-0 bottom-0 h-1/3 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to top, rgba(8,18,48,0.5), transparent)' }}
+          />
+
+          {/* Controles sobre a arte. No mobile só as bolinhas — o CTA fica
+              abaixo do banner pra não cobrir os textos das artes. */}
+          <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col items-center gap-3 pb-3 sm:pb-5 md:pb-6 pointer-events-none">
+            <div className="hidden md:block pointer-events-auto">{heroCta('px-9 py-4 text-base gap-3')}</div>
+
+            {/* Bolinhas indicando o banner atual */}
+            <div
+              className="flex items-center gap-2 sm:gap-2.5 rounded-full px-3 py-2 pointer-events-auto"
+              style={{ background: 'rgba(8,18,48,0.38)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
+            >
+              {HERO_SLIDES.map((s, i) => (
+                <button
+                  key={s.id}
+                  onClick={() => heroGo(i)}
+                  aria-label={`Ir para o banner ${i + 1} de ${HERO_SLIDES.length}`}
+                  aria-current={i === heroIdx ? 'true' : undefined}
+                  className="w-2.5 h-2.5 rounded-full transition-all duration-300 hover:scale-125"
+                  style={{
+                    background: i === heroIdx ? C.yellow : 'rgba(255,255,255,0.45)',
+                    boxShadow: i === heroIdx ? `0 0 0 3px ${C.yellow}40` : 'none',
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* CTA no mobile — logo abaixo do banner */}
+        <div className="md:hidden px-5 py-4">
+          {heroCta('w-full px-5 py-3.5 text-sm gap-2')}
         </div>
       </section>
 
