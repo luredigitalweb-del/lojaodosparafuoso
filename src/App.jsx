@@ -36,16 +36,9 @@ const IMG = {
   automotivo: 'https://thumbs.dreamstime.com/b/lata-do-pl%C3%A1stico-dos-filtro-de-%C3%B3leo-do-carro-e-do-%C3%B3leo-de-motor-94129693.jpg',
 };
 
-// Banners do hero. As três artes têm proporções bem diferentes, então:
-// no desktop cada uma é recortada (object-cover) no ponto certo via `pos`;
-// no mobile todas aparecem inteiras (object-contain) sobre um fundo borrado.
+// Banners do hero. Como as artes têm proporções diferentes entre si, cada uma
+// tem seu `pos` (object-position) pra ser recortada no ponto certo.
 const HERO_SLIDES = [
-  {
-    id: 'craques',
-    src: '/banner.webp',
-    alt: 'Craques do Brasil — uma seleção de campeões para você',
-    pos: 'center',
-  },
   {
     id: 'dia-dos-pais',
     src: '/banner-dia-dos-pais.webp',
