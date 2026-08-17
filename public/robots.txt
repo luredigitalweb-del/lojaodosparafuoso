@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lp.lojaodosparafusosce.com.br/sitemap.xml
+Sitemap: https://www.lojaodosparafusosce.com.br/sitemap.xml
