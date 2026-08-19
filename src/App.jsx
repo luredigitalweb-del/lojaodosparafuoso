@@ -40,12 +40,6 @@ const IMG = {
 // tem seu `pos` (object-position) pra ser recortada no ponto certo.
 const HERO_SLIDES = [
   {
-    id: 'dia-dos-pais',
-    src: '/banner-dia-dos-pais.webp',
-    alt: 'Pai para toda obra — é mais que presente, é Bosch!',
-    pos: 'center 68%',
-  },
-  {
     id: 'epis',
     src: '/banner-epis.webp',
     alt: 'EPIs de qualidade — proteção, conforto e confiança para trabalhar com mais segurança',
@@ -54,6 +48,8 @@ const HERO_SLIDES = [
 ];
 const HERO_INTERVAL = 6000; // tempo de cada banner no ar
 const HERO_SWIPE = 50;      // px de arrasto pra trocar de banner
+// Com um banner só não há o que alternar: sem autoplay, sem bolinhas, sem arrasto.
+const HERO_MULTI = HERO_SLIDES.length > 1;
 
 // ============================================
 // ÍCONES
@@ -424,13 +420,14 @@ export default function App() {
   // Autoplay contínuo. setTimeout (e não setInterval) pra que qualquer troca
   // manual — bolinha ou arrasto — reinicie a contagem do zero.
   useEffect(() => {
-    if (heroDragging) return;
+    if (heroDragging || !HERO_MULTI) return;
     const t = setTimeout(() => heroGo(heroIdx + 1), HERO_INTERVAL);
     return () => clearTimeout(t);
   }, [heroIdx, heroDragging]);
 
   // Arrasto com dedo e com mouse (Pointer Events cobre os dois)
   const onHeroPointerDown = (e) => {
+    if (!HERO_MULTI) return;
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     heroStartX.current = e.clientX;
     heroMoved.current = false;
@@ -636,7 +633,7 @@ export default function App() {
           style={{
             transform: `translateX(${heroNudge}px)`,
             transition: heroDragging ? 'none' : 'transform 350ms cubic-bezier(0.22, 1, 0.36, 1)',
-            cursor: heroDragging ? 'grabbing' : 'grab',
+            cursor: HERO_MULTI ? (heroDragging ? 'grabbing' : 'grab') : 'default',
           }}
         >
           {HERO_SLIDES.map((s, i) => (
@@ -668,25 +665,27 @@ export default function App() {
           <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col items-center gap-3 pb-2.5 sm:pb-5 md:pb-6 pointer-events-none">
             <div className="hidden sm:block pointer-events-auto">{heroCta('px-9 py-4 text-base gap-3')}</div>
 
-            {/* Bolinhas indicando o banner atual */}
-            <div
-              className="flex items-center gap-2 sm:gap-2.5 rounded-full px-3 py-2 pointer-events-auto"
-              style={{ background: 'rgba(8,18,48,0.38)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
-            >
-              {HERO_SLIDES.map((s, i) => (
-                <button
-                  key={s.id}
-                  onClick={() => heroGo(i)}
-                  aria-label={`Ir para o banner ${i + 1} de ${HERO_SLIDES.length}`}
-                  aria-current={i === heroIdx ? 'true' : undefined}
-                  className="w-2.5 h-2.5 rounded-full transition-all duration-300 hover:scale-125"
-                  style={{
-                    background: i === heroIdx ? C.yellow : 'rgba(255,255,255,0.45)',
-                    boxShadow: i === heroIdx ? `0 0 0 3px ${C.yellow}40` : 'none',
-                  }}
-                />
-              ))}
-            </div>
+            {/* Bolinhas indicando o banner atual (só com mais de um banner) */}
+            {HERO_MULTI && (
+              <div
+                className="flex items-center gap-2 sm:gap-2.5 rounded-full px-3 py-2 pointer-events-auto"
+                style={{ background: 'rgba(8,18,48,0.38)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
+              >
+                {HERO_SLIDES.map((s, i) => (
+                  <button
+                    key={s.id}
+                    onClick={() => heroGo(i)}
+                    aria-label={`Ir para o banner ${i + 1} de ${HERO_SLIDES.length}`}
+                    aria-current={i === heroIdx ? 'true' : undefined}
+                    className="w-2.5 h-2.5 rounded-full transition-all duration-300 hover:scale-125"
+                    style={{
+                      background: i === heroIdx ? C.yellow : 'rgba(255,255,255,0.45)',
+                      boxShadow: i === heroIdx ? `0 0 0 3px ${C.yellow}40` : 'none',
+                    }}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
